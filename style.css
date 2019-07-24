@@ -56,8 +56,14 @@
   grid-template-columns: repeat(12, 1fr);
   padding: 1rem;
 }
-.list-element-text {
+.list-element-text,
+.input-task-edit {
+  margin: 0 1rem;
   grid-column: 2 / 12;
+}
+
+.input-task-edit {
+  font-size: 1rem;
 }
 
 .list-checkbox {

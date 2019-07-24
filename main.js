@@ -11,7 +11,8 @@ const mockArr = [];
 
 function addTask() {
   const text = inputElement.value;
-  const listId = listContainer.getElementsByClassName('list-element').length || 0;
+  if (!text) return;
+  const listId = +new Date().getTime();
 
   mockArr.push({
     listId,
@@ -39,9 +40,11 @@ function renderTask(listId) {
   // renderTasksInfo();
 
   const checkBox = listDivElement.getElementsByClassName('list-checkbox')[0];
+  const taskTextElement = listDivElement.getElementsByClassName('list-element-text')[0];
   const deleteBtn = listDivElement.getElementsByClassName('list-delete-btn')[0];
 
   checkBox.addEventListener('click', () => clickOnCheckBox(listId, checkBox));
+  taskTextElement.addEventListener('click', () => editTask(listId, taskTextElement));
   deleteBtn.addEventListener('click', () => clickToDeleteBtn(listId, listDivElement));
 }
 
@@ -64,6 +67,13 @@ function clickOnCheckBox(listId, checkBox) {
 function clickToDeleteBtn(listId, listDivElement) {
   mockArr.splice(listId, 1);
   listDivElement.remove();
+}
+
+function editTask(listId, taskTextElement) {
+  let text = taskTextElement.innerText;
+  taskTextElement.outerHTML  = `
+    <input type="text" placeholder="edit text" class="input-task-edit" value="${text}">
+  `;
 }
 
 addTaskButton.addEventListener('click', addTask);
