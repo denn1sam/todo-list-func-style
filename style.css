@@ -58,6 +58,7 @@
   padding: 1rem;
 }
 .list-element-text {
+  cursor: pointer;
   margin: 0 1rem;
   grid-column: 2 / 12;
 }
